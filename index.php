@@ -9,7 +9,10 @@ if (isset($_GET['action'])) {
         case 'login':
             UserController::loginAction();
             break;
-            
+         
+        case 'login_submit':
+            UserController::loginSubmitAction();
+            break;
 
          
     }
