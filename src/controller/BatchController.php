@@ -174,4 +174,24 @@ class BatchRepository extends BaseRepository
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+        public static function getExpiringBatches(int $days): array
+    {
+        $stmt = self::getConnection()->prepare("
+            SELECT
+                b.*,
+                p.designation AS product_name
+            FROM batches b
+            INNER JOIN products p
+                ON p.id = b.product_id
+            WHERE b.status = 'ACTIVE'
+              AND b.expiration_date BETWEEN CURDATE()
+              AND DATE_ADD(CURDATE(), INTERVAL ? DAY)
+            ORDER BY b.expiration_date ASC
+        ");
+
+        $stmt->execute([$days]);
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
 }    
