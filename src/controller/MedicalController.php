@@ -56,5 +56,38 @@ class MedicalController
         exit;
     }
 
-   
+    public static function editAction()
+    {
+        $id = intval($_GET['id']);
+        $product = MedicalRepository::getById($id);
+
+        if (!$product) {
+            header('Location: index.php?action=products');
+            exit;
+        }
+
+        include __DIR__ . "/../../views/templates/dashboard/products/edit.php";
+    }
+
+    public static function editSubmitAction()
+    {
+        $id =  $_POST['id'];
+        $cipCode = $_POST['cip_code'];
+        $designation = $_POST['designation'];
+        $price = floatval($_POST['price']);
+        $minStockAlert = intval($_POST['min_stock_alert']);
+
+        if (empty($cipCode) || empty($designation) || empty($price) || empty($minStockAlert)) {
+            $_SESSION['error'] = "Please fill in all fields.";
+            header('Location: index.php?action=products_edit&id=' . $id);
+            exit;
+        }
+
+        MedicalRepository::update($id, $cipCode, $designation, $price, $minStockAlert);
+
+        header('Location: index.php?action=products');
+        exit;
+    }
+
+
 }
