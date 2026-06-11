@@ -31,5 +31,55 @@ class MedicalRepository extends BaseRepository
         return $product ?: null;
     }
 
- 
+    public static function create(
+        string $cipCode,
+        string $designation,
+        float $price,
+        int $minStockAlert
+    ): bool {
+        $stmt = self::getConnection()->prepare("
+            INSERT INTO products (
+                cip_code,
+                designation,
+                price,
+                min_stock_alert
+            )
+            VALUES (?, ?, ?, ?)
+        ");
+
+        return $stmt->execute([
+            $cipCode,
+            $designation,
+            $price,
+            $minStockAlert
+        ]);
+    }
+
+    public static function update(
+        int $id,
+        string $cipCode,
+        string $designation,
+        float $price,
+        int $minStockAlert
+    ): bool {
+        $stmt = self::getConnection()->prepare("
+            UPDATE products
+            SET
+                cip_code = ?,
+                designation = ?,
+                price = ?,
+                min_stock_alert = ?
+            WHERE id = ?
+        ");
+
+        return $stmt->execute([
+            $cipCode,
+            $designation,
+            $price,
+            $minStockAlert,
+            $id
+        ]);
+    }
+
+   
 }
