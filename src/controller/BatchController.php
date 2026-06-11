@@ -194,4 +194,41 @@ class BatchRepository extends BaseRepository
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+       public static function getFEFOWarnings()
+{
+    $stmt = self::getConnection()->query("
+        SELECT 
+            b.id,
+            b.batch_number,
+            b.expiration_date,
+            b.qty_available,
+            p.designation AS product_name
+        FROM batches b
+        INNER JOIN products p ON p.id = b.product_id
+        WHERE b.qty_available > 0
+        ORDER BY b.expiration_date ASC
+    ");
+
+    $batches = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+    foreach ($batches as $b) {
+
+        $today = new DateTime();
+        $expiry = new DateTime($b->expiration_date);
+        $diff = $today->diff($expiry)->days;
+
+        if ($expiry < $today) {
+            $b->status = 'EXPIRED';
+        } elseif ($diff <= 30) {
+            $b->status = 'CRITICAL';
+        } elseif ($diff <= 90) {
+            $b->status = 'WARNING';
+        } else {
+            $b->status = 'OK';
+        }
+    }
+
+    return $batches;
+}
+
 }    
