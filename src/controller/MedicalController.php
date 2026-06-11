@@ -89,5 +89,12 @@ class MedicalController
         exit;
     }
 
+    public static function deleteAction()
+    {
+        $id = $_GET['id'];
+        MedicalRepository::delete($id);
 
+        header('Location: index.php?action=products');
+        exit;
+    }
 }
