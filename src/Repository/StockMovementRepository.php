@@ -83,5 +83,23 @@ class StockMovementRepository extends BaseRepository
     }
 
 
-   
+    public static function findByType(string $type): array
+    {
+        $stmt = self::getConnection()->prepare("
+            SELECT 
+                sm.*,
+                b.batch_number
+            FROM stock_movements sm
+            LEFT JOIN batches b ON sm.batch_id = b.id
+            WHERE sm.type = ?
+            ORDER BY sm.movement_date DESC
+        ");
+
+        $stmt->execute([$type]);
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+
+  
 }
