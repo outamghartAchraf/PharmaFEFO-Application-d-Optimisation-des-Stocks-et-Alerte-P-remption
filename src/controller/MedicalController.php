@@ -37,5 +37,24 @@ class MedicalController
         include __DIR__ . "/../../views/templates/dashboard/products/create.php";
     }
 
+    public static function createSubmitAction()
+    {
+        $cipCode = $_POST['cip_code'];
+        $designation = $_POST['designation'];
+        $price = floatval($_POST['price']);
+        $minStockAlert = intval($_POST['min_stock_alert']);
+
+        if (empty($cipCode) || empty($designation) || empty($price) || empty($minStockAlert)) {
+            $_SESSION['error'] = "Please fill in all fields.";
+            header('Location: index.php?action=products_create');
+            exit;
+        }
+
+        MedicalRepository::create($cipCode, $designation, $price, $minStockAlert);
+
+        header('Location: index.php?action=products');
+        exit;
+    }
+
    
 }
