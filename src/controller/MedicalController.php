@@ -26,5 +26,16 @@ class MedicalController
     include __DIR__ . "/../../views/templates/dashboard/index.php";
     }
 
- 
+    public static function listAction()
+    {
+        $products = MedicalRepository::getAll();
+        include __DIR__ . "/../../views/templates/dashboard/products/index.php";
+    }
+
+    public static function createAction()
+    {
+        include __DIR__ . "/../../views/templates/dashboard/products/create.php";
+    }
+
+   
 }
