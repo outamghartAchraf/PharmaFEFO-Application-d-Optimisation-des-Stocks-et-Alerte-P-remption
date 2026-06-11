@@ -37,5 +37,32 @@ class BatchRepository extends BaseRepository
         return $batch ?: null;
     }
 
+     public static function create(
+        int $productId,
+        string $batchNumber,
+        string $expirationDate,
+        int $quantity
+    ): bool {
+        $stmt = self::getConnection()->prepare("
+            INSERT INTO batches (
+                product_id,
+                batch_number,
+                expiration_date,
+                qty_received,
+                qty_available,
+                status
+            )
+            VALUES (?, ?, ?, ?, ?, 'ACTIVE')
+        ");
+
+        return $stmt->execute([
+            $productId,
+            $batchNumber,
+            $expirationDate,
+            $quantity,
+            $quantity
+        ]);
+    }
+
 
 }    
