@@ -36,5 +36,36 @@ class StockMovementRepository extends BaseRepository
     }
 
 
-  
+    public static function create(
+        ?int $batchId,
+        int $userId,
+        string $type,
+        int $quantity,
+        ?string $note = null,
+        ?string $movementDate = null
+    ): bool {
+
+        $stmt = self::getConnection()->prepare("
+        INSERT INTO stock_movements (
+            batch_id,
+            user_id,
+            type,
+            quantity,
+            movement_date,
+            note
+        )
+        VALUES (?, ?, ?, ?, ?, ?)
+    ");
+
+        return $stmt->execute([
+            $batchId,
+            $userId,
+            $type,
+            $quantity,
+            $movementDate ?? date('Y-m-d H:i:s'),
+            $note
+        ]);
+    }
+
+
 }
