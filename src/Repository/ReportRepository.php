@@ -73,5 +73,39 @@ class ReportRepository extends BaseRepository
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+ 
+    public static function getMovementsReport(): array
+    {
+        $stmt = self::getConnection()->query("
+            SELECT
+                sm.id,
+                sm.type,
+                sm.quantity,
+                sm.movement_date,
+                sm.note,
 
+                b.batch_number,
+
+                p.designation AS product_name,
+
+                u.name
+            FROM stock_movements sm
+
+            INNER JOIN batches b
+                ON b.id = sm.batch_id
+
+            INNER JOIN products p
+                ON p.id = b.product_id
+
+            INNER JOIN users u
+                ON u.id = sm.user_id
+
+            ORDER BY sm.movement_date DESC
+        ");
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+ 
+  
 }
