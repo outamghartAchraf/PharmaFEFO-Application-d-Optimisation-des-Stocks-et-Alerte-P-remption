@@ -107,5 +107,25 @@ class ReportRepository extends BaseRepository
     }
 
  
-  
+    public static function getStatistics(): object
+    {
+        $stmt = self::getConnection()->query("
+            SELECT
+                (SELECT COUNT(*) FROM products) AS total_products,
+
+                (SELECT COUNT(*) FROM batches) AS total_batches,
+
+                (SELECT COUNT(*)
+                 FROM batches
+                 WHERE expiration_date < CURDATE()) AS expired_batches,
+
+                (SELECT COUNT(*)
+                 FROM batches
+                 WHERE expiration_date BETWEEN CURDATE()
+                 AND DATE_ADD(CURDATE(), INTERVAL 90 DAY)
+                ) AS expiring_soon
+        ");
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
 }
