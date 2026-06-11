@@ -101,5 +101,20 @@ class StockMovementRepository extends BaseRepository
     }
 
 
-  
+    public static function getTotalOutByBatch(int $batchId): int
+    {
+        $stmt = self::getConnection()->prepare("
+            SELECT COALESCE(SUM(quantity), 0)
+            FROM stock_movements
+            WHERE batch_id = ?
+              AND type = 'OUT'
+        ");
+
+        $stmt->execute([$batchId]);
+
+        return (int) $stmt->fetchColumn();
+    }
+
+
+   
 }
