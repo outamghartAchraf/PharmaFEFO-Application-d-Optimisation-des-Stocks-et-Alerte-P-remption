@@ -81,5 +81,13 @@ class MedicalRepository extends BaseRepository
         ]);
     }
 
-   
+    public static function delete(int $id): bool
+    {
+        $stmt = self::getConnection()->prepare("
+            DELETE FROM products
+            WHERE id = ?
+        ");
+
+        return $stmt->execute([$id]);
+    }
 }
