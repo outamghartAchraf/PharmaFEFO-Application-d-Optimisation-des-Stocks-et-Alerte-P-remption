@@ -22,4 +22,20 @@ class BatchRepository extends BaseRepository
     }
 
 
+        public static function getById(int $id): ?object
+    {
+        $stmt = self::getConnection()->prepare("
+            SELECT *
+            FROM batches
+            WHERE id = ?
+        ");
+
+        $stmt->execute([$id]);
+
+        $batch = $stmt->fetch(PDO::FETCH_OBJ);
+
+        return $batch ?: null;
+    }
+
+
 }    
