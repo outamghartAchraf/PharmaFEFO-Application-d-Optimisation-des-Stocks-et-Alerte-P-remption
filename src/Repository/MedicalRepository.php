@@ -16,5 +16,20 @@ class MedicalRepository extends BaseRepository
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public static function getById(int $id): ?object
+    {
+        $stmt = self::getConnection()->prepare("
+            SELECT *
+            FROM products
+            WHERE id = ?
+        ");
+
+        $stmt->execute([$id]);
+
+        $product = $stmt->fetch(PDO::FETCH_OBJ);
+
+        return $product ?: null;
+    }
+
  
 }
