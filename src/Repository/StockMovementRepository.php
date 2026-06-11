@@ -19,5 +19,22 @@ class StockMovementRepository extends BaseRepository
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
- 
+
+    public static function getById(int $id): ?object
+    {
+        $stmt = self::getConnection()->prepare("
+            SELECT * 
+            FROM stock_movements
+            WHERE id = ?
+        ");
+
+        $stmt->execute([$id]);
+
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+
+        return $result ?: null;
+    }
+
+
+  
 }
