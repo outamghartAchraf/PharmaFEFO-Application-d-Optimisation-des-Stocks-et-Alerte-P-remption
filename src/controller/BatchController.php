@@ -108,5 +108,19 @@ class BatchRepository extends BaseRepository
         return $stmt->execute([$id]);
     }
 
+        public static function findByProductId(int $productId): array
+    {
+        $stmt = self::getConnection()->prepare("
+            SELECT *
+            FROM batches
+            WHERE product_id = ?
+            ORDER BY expiration_date ASC
+        ");
+
+        $stmt->execute([$productId]);
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
 
 }    
