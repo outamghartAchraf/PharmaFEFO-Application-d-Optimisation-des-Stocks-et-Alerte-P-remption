@@ -97,4 +97,16 @@ class BatchRepository extends BaseRepository
         ]);
     }
 
+    
+    public static function delete(int $id): bool
+    {
+        $stmt = self::getConnection()->prepare("
+            DELETE FROM batches
+            WHERE id = ?
+        ");
+
+        return $stmt->execute([$id]);
+    }
+
+
 }    
