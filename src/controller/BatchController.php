@@ -141,4 +141,20 @@ class BatchRepository extends BaseRepository
         return $batch ?: null;
     }
 
+        public static function updateQuantity(
+        int $batchId,
+        int $newQuantity
+    ): bool {
+        $stmt = self::getConnection()->prepare(
+            "UPDATE batches
+             SET qty_available = ?
+             WHERE id = ?"
+        );
+
+        return $stmt->execute([
+            $newQuantity,
+            $batchId
+        ]);
+    }
+
 }    
