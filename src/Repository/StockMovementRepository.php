@@ -68,4 +68,20 @@ class StockMovementRepository extends BaseRepository
     }
 
 
+    public static function findByBatchId(int $batchId): array
+    {
+        $stmt = self::getConnection()->prepare("
+            SELECT * 
+            FROM stock_movements
+            WHERE batch_id = ?
+            ORDER BY movement_date DESC
+        ");
+
+        $stmt->execute([$batchId]);
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+
+   
 }
