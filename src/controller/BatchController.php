@@ -122,5 +122,23 @@ class BatchRepository extends BaseRepository
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public static function getNextBatchFEFO(int $productId): ?object
+    {
+        $stmt = self::getConnection()->prepare("
+            SELECT *
+            FROM batches
+            WHERE product_id = ?
+              AND qty_available > 0
+              AND status = 'ACTIVE'
+            ORDER BY expiration_date ASC
+            LIMIT 1
+        ");
+
+        $stmt->execute([$productId]);
+
+        $batch = $stmt->fetch(PDO::FETCH_OBJ);
+
+        return $batch ?: null;
+    }
 
 }    
