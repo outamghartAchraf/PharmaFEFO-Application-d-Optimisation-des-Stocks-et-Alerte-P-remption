@@ -15,6 +15,16 @@
 </head>
 <body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-500 selection:text-white">
 
+<?php if (isset($_GET['message'])): ?>
+<div id="toast"
+     class="fixed top-5 right-5 bg-green-500 text-white px-4 py-3 rounded-lg shadow-lg z-50">
+    <?= htmlspecialchars($_GET['message']) ?>
+</div>
+ 
+<?php endif; ?>
+
+
+
 <div class="flex h-screen w-screen overflow-hidden">
 
      <?php include __DIR__ . '/../../../layout/sidebar.php'; ?>
@@ -177,6 +187,15 @@
         </main>
     </div>
 </div>
+
+<script>
+    setTimeout(() => {
+    const toast = document.getElementById('toast');
+    if (toast) {
+        toast.remove();
+    }
+}, 3000);
+</script>
 
 </body>
 </html>

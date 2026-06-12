@@ -80,7 +80,7 @@ class UserController
         UserRepository::create($name, $email, $password, $roleId);
 
         $_SESSION['success'] = "User created successfully";
-        header("Location: index.php?action=user_index");
+        header("Location: index.php?action=user_index&message=" . urlencode('User created successfully'));
         exit;
     }
 
@@ -112,7 +112,7 @@ class UserController
         UserRepository::update($id, $name, $email, $roleId);
 
         $_SESSION['success'] = "User updated successfully";
-        header("Location: index.php?action=user_index");
+        header("Location: index.php?action=user_index&message=" . urlencode('User updated successfully'));
         exit;
     }
 
@@ -124,7 +124,7 @@ class UserController
         UserRepository::delete($id);
 
         $_SESSION['success'] = "User deleted";
-        header("Location: index.php?action=user_index");
+        header("Location: index.php?action=user_index&message=" . urlencode('User deleted'));
         exit;
     }
 

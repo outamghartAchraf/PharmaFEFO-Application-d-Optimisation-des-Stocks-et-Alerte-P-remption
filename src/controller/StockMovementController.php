@@ -88,7 +88,7 @@ class StockMovementController
         );
 
         $_SESSION['success'] = "Stock movement saved successfully!";
-        header("Location: index.php?action=stock_movements");
+        header("Location: index.php?action=stock_movements?message=" . urlencode('Stock movement saved successfully!'));
         exit;
     }
 

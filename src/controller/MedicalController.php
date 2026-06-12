@@ -91,17 +91,19 @@ class MedicalController
 
         MedicalRepository::update($id, $cipCode, $designation, $price, $minStockAlert);
 
-        header('Location: index.php?action=products');
+        header('Location: index.php?action=products&message=Product updated successfully.');
         exit;
     }
 
     public static function deleteAction()
     {
         Middleware::isPharmacien();
+
         $id = $_GET['id'];
         MedicalRepository::delete($id);
 
-        header('Location: index.php?action=products');
+     header('Location: index.php?action=products&message=' . urlencode('Product deleted successfully.'));
+
         exit;
     }
 }

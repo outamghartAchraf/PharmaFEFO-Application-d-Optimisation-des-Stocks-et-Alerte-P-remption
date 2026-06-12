@@ -1,14 +1,14 @@
 <?php
 include_once __DIR__ . "/../Repository/BatchRepository.php";
 include_once __DIR__ . "/../Repository/MedicalRepository.php";
- require_once __DIR__ . "/../middleware/RoleMiddleware.php";
+require_once __DIR__ . "/../middleware/RoleMiddleware.php";
 
 class BatchController
 {
 
     public static function listAction()
     {
-         Middleware::isPharmacien(); 
+        Middleware::isPharmacien();
 
         $batches = BatchRepository::getAll();
         include __DIR__ . "/../../views/templates/dashboard/batches/index.php";
@@ -23,7 +23,7 @@ class BatchController
 
     public static function createSubmitAction()
     {
-            Middleware::isPharmacien();
+        Middleware::isPharmacien();
         $productId      = $_POST['product_id'];
         $quantity       = $_POST['quantity'];
         $expirationDate = $_POST['expiration_date'];
@@ -56,7 +56,7 @@ class BatchController
         );
 
         $_SESSION['success'] = "Batch created successfully!";
-        header('Location: index.php?action=batches');
+        header('Location: index.php?action=batches&message=' . urlencode('Batch created successfully!'));
         exit;
     }
 
@@ -103,7 +103,7 @@ class BatchController
             exit;
         }
 
-        
+
         BatchRepository::update(
             $batchId,
             $productId,
@@ -115,7 +115,7 @@ class BatchController
         );
 
         $_SESSION['success'] = "Batch updated successfully!";
-        header('Location: index.php?action=batches');
+        header('Location: index.php?action=batches&message=' . urlencode('Batch updated successfully!'));
         exit;
     }
 
@@ -125,7 +125,7 @@ class BatchController
         $batchId = $_GET['id'];
         BatchRepository::delete($batchId);
         $_SESSION['success'] = "Batch deleted successfully!";
-        header('Location: index.php?action=batches');
+        header('Location: index.php?action=batches&message=' . urlencode('Batch deleted successfully!'));
         exit;
     }
 }
