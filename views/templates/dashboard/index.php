@@ -56,7 +56,7 @@
                     <div class="w-7 h-7 rounded-full bg-blue-100 border border-blue-200 flex items-center justify-center text-[11px] font-bold text-blue-700 shadow-sm">
                         AU
                     </div>
-                    <span class="text-xs font-bold text-slate-700">Admin User</span>
+                    <span class="text-xs font-bold text-slate-700"><?php echo $_SESSION['user']['name'] ?? 'User'; ?></span>
                     <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
                 </div>
             </div>

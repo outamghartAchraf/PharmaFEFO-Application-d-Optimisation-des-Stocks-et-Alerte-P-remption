@@ -2,7 +2,7 @@
 session_start();
 require_once __DIR__ . "/../repository/UserRepository.php";
 require_once __DIR__ . "/../repository/RoleRepository.php";
-require_once __DIR__ . "/../middleware/RoleMiddleware.php";
+ 
 
 class UserController
 {
@@ -50,7 +50,7 @@ class UserController
 
       public static function index()
     {
-        RoleMiddleware::check(['ADMIN']);
+        
         $users = UserRepository::getAll();
         include __DIR__ . '/../../views/templates/dashboard/users/index.php';
     }
@@ -128,5 +128,7 @@ class UserController
         session_destroy();
         header("Location: index.php?action=login");
         exit;
+
+}
 
 }

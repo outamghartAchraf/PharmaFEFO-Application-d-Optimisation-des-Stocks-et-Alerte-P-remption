@@ -113,6 +113,9 @@ if (isset($_GET['action'])) {
         case 'user_delete':
             UserController::delete();
             break;
+        case 'logout':
+            UserController::logout();
+            break;    
     }
 } else {
     MedicalController::DashboardAction();
