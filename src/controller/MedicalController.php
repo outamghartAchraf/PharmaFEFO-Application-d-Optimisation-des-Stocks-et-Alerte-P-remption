@@ -22,8 +22,7 @@ class MedicalController
     $totalBatches  = count(BatchRepository::getAll());
     $totalMovements = count(StockMovementRepository::getAll());
     $fefoWarnings = BatchRepository::getFEFOWarnings();
-    
-    include __DIR__ . "/../../views/templates/dashboard/index.php";
+        include __DIR__ . "/../../views/templates/dashboard/index.php";
     }
 
     public static function listAction()

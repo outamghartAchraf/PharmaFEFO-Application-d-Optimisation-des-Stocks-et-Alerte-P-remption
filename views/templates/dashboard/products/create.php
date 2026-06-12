@@ -17,62 +17,7 @@
 
 <div class="flex h-screen w-screen overflow-hidden">
 
-    <aside class="w-60 bg-slate-900 text-white flex flex-col flex-shrink-0 border-r border-slate-800 hidden md:flex">
-        
-        <div class="p-5 border-b border-slate-800 flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-blue-600/15 border border-blue-500/30 flex items-center justify-center">
-                <i class="fa-solid fa-capsules text-blue-400 text-xl"></i>
-            </div>
-            <div>
-                <h1 class="text-sm font-bold tracking-tight text-white">PharmaFEFO</h1>
-                <p class="text-[11px] text-slate-500 font-medium tracking-wide">FEFO Management</p>
-            </div>
-        </div>
-
-        <nav class="flex-1 p-3 flex flex-col gap-1 overflow-y-auto">
-            <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 font-medium text-sm transition-all group">
-                <i class="fa-solid fa-chart-pie text-base w-5 text-center text-slate-500 group-hover:text-blue-400 transition-colors"></i>
-                <span>Dashboard</span>
-            </a>
-
-            <a href="index.php?action=products_index" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg bg-blue-600 text-white font-medium text-sm transition-all shadow-sm shadow-blue-600/10">
-                <i class="fa-solid fa-pills text-base w-5 text-center"></i>
-                <span>Products</span>
-            </a>
-
-            <a href="index.php?action=batch_index" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 font-medium text-sm transition-all group">
-                <i class="fa-solid fa-boxes-stacked text-base w-5 text-center text-slate-500 group-hover:text-blue-400 transition-colors"></i>
-                <span>Batches</span>
-            </a>
-
-            <a href="index.php?action=stock_index" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 font-medium text-sm transition-all group">
-                <i class="fa-solid fa-arrow-right-arrow-left text-base w-5 text-center text-slate-500 group-hover:text-blue-400 transition-colors"></i>
-                <span>Stock Movements</span>
-            </a>
-
-            <a href="index.php?action=notifications_index" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 font-medium text-sm transition-all group">
-                <i class="fa-solid fa-bell text-base w-5 text-center text-slate-500 group-hover:text-blue-400 transition-colors"></i>
-                <span>Notifications</span>
-            </a>
-
-            <a href="index.php?action=report_dashboard" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 font-medium text-sm transition-all group">
-                <i class="fa-solid fa-file-lines text-base w-5 text-center text-slate-500 group-hover:text-blue-400 transition-colors"></i>
-                <span>Reports</span>
-            </a>
-
-            <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 font-medium text-sm transition-all group">
-                <i class="fa-solid fa-users text-base w-5 text-center text-slate-500 group-hover:text-blue-400 transition-colors"></i>
-                <span>Users</span>
-            </a>
-        </nav>
-
-        <div class="p-3 border-t border-slate-800">
-            <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-rose-400 hover:text-rose-300 hover:bg-rose-50/10 font-medium text-sm transition-all">
-                <i class="fa-solid fa-right-from-bracket text-base w-5 text-center"></i>
-                <span>Logout</span>
-            </a>
-        </div>
-    </aside>
+      <?php include __DIR__ . '/../../../layout/sidebar.php'; ?>
 
     <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
 
