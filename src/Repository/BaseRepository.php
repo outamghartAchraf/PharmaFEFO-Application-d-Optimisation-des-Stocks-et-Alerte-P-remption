@@ -2,7 +2,7 @@
 
 include_once __DIR__ . "/../../config/DB.php";
 
-class BaseRepository
+class BaseRepository 
 
 {
     protected static ?PDO $pdo = null;

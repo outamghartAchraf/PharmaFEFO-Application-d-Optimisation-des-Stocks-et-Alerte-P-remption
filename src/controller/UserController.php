@@ -2,6 +2,7 @@
 session_start();
 require_once __DIR__ . "/../repository/UserRepository.php";
 require_once __DIR__ . "/../repository/RoleRepository.php";
+require_once __DIR__ . "/../middleware/RoleMiddleware.php";
  
 
 class UserController
@@ -50,19 +51,21 @@ class UserController
 
       public static function index()
     {
-        
+         Middleware::isAdmin();
         $users = UserRepository::getAll();
         include __DIR__ . '/../../views/templates/dashboard/users/index.php';
     }
 
     public static function create()
     {
+          Middleware::isAdmin();        
         $roles = RoleRepository::getAll();
         include __DIR__ . '/../../views/templates/dashboard/users/create.php';
     }
 
     public static function store()
     {
+        Middleware::isAdmin();
         $name     = trim($_POST['name']);
         $email    = trim($_POST['email']);
         $password = $_POST['password'];
@@ -83,6 +86,7 @@ class UserController
 
     public static function edit()
     {
+        Middleware::isAdmin();
         $id = (int) $_GET['id'];
 
         $user = UserRepository::getById($id);
@@ -93,6 +97,7 @@ class UserController
 
     public static function update()
     {
+        Middleware::isAdmin();
         $id     = (int) $_POST['id'];
         $name   = trim($_POST['name']);
         $email  = trim($_POST['email']);
@@ -113,6 +118,7 @@ class UserController
 
     public static function delete()
     {
+        Middleware::isAdmin();
         $id = (int) $_GET['id'];
 
         UserRepository::delete($id);

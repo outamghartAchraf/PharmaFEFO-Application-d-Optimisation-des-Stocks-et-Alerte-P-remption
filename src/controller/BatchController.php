@@ -1,24 +1,29 @@
 <?php
 include_once __DIR__ . "/../Repository/BatchRepository.php";
 include_once __DIR__ . "/../Repository/MedicalRepository.php";
+ require_once __DIR__ . "/../middleware/RoleMiddleware.php";
 
 class BatchController
 {
 
     public static function listAction()
     {
+         Middleware::isPharmacien(); 
+
         $batches = BatchRepository::getAll();
         include __DIR__ . "/../../views/templates/dashboard/batches/index.php";
     }
 
     public static function batches_create()
     {
+        Middleware::isPharmacien();
         $products = MedicalRepository::getAll();
         include __DIR__ . "/../../views/templates/dashboard/batches/create.php";
     }
 
     public static function createSubmitAction()
     {
+            Middleware::isPharmacien();
         $productId      = $_POST['product_id'];
         $quantity       = $_POST['quantity'];
         $expirationDate = $_POST['expiration_date'];
@@ -58,6 +63,7 @@ class BatchController
 
     public static function editBatchAction()
     {
+        Middleware::isPharmacien();
         $batchId = $_GET['id'];
         $products = MedicalRepository::getAll();
         $batch = BatchRepository::getById($batchId);
@@ -70,6 +76,7 @@ class BatchController
 
     public static function updateBatch()
     {
+        Middleware::isPharmacien();
         $batchId        =  $_POST['id'];
         $productId      =  $_POST['product_id'];
         $batchNumber    = trim($_POST['batch_number']);
@@ -114,6 +121,7 @@ class BatchController
 
     public static function deleteAction()
     {
+        Middleware::isPharmacien();
         $batchId = $_GET['id'];
         BatchRepository::delete($batchId);
         $_SESSION['success'] = "Batch deleted successfully!";

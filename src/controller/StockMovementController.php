@@ -3,12 +3,14 @@
 require_once __DIR__ . '/../Repository/StockMovementRepository.php';
 require_once __DIR__ . '/../Repository/BatchRepository.php';
 require_once __DIR__ . '/../Repository/MedicalRepository.php';
+ require_once __DIR__ . "/../middleware/RoleMiddleware.php";
 
 class StockMovementController
 {
 
     public static function index()
     {
+        Middleware::isPreparateur();
         $movements = StockMovementRepository::getAll();
 
         include __DIR__ . "/../../views/templates/dashboard/stock_movements/index.php";
@@ -16,12 +18,14 @@ class StockMovementController
 
     public static function create_stock()
     {
+        Middleware::isPreparateur();
         $products = MedicalRepository::getAll();
         include __DIR__ . "/../../views/templates/dashboard/stock_movements/create.php";
     }
 
     public static function store()
     {
+        Middleware::isPreparateur();
         $productId = (int) $_POST['product_id'];
         $type      = $_POST['type'];
         $quantity  = (int) $_POST['quantity'];
@@ -90,6 +94,7 @@ class StockMovementController
 
     public static function byBatch()
     {
+        Middleware::isPreparateur();
         $batchId = (int) $_GET['batch_id'];
 
         $movements = StockMovementRepository::findByBatchId($batchId);
@@ -99,6 +104,7 @@ class StockMovementController
 
     public static function out()
     {
+        Middleware::isPreparateur();
         $movements = StockMovementRepository::findByType('OUT');
 
         include __DIR__ . "/../../views/templates/dashboard/stock_movements/index.php";
@@ -106,6 +112,7 @@ class StockMovementController
 
     public static function in()
     {
+        Middleware::isPreparateur();
         $movements = StockMovementRepository::findByType('IN');
 
         include __DIR__ . "/../../views/templates/dashboard/stock_movements/index.php";
