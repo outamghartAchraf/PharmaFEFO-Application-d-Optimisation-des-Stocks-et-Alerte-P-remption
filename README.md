@@ -7,7 +7,15 @@ PharmaFEFO is a web application designed to optimize pharmaceutical stock manage
 The system helps pharmacies and healthcare facilities manage products, batches, stock movements, expiration alerts, notifications, reports, and users while reducing losses caused by expired medications.
 
 ---
+## diagrams
+### diagram de class 
+<img width="1089" height="852" alt="digram de class" src="https://github.com/user-attachments/assets/82f37267-801f-45fc-8e95-b5dfff40e5e0" />
+### diagram de use case
+<img width="884" height="864" alt="use de case" src="https://github.com/user-attachments/assets/c18d2f4c-2ea2-4d47-bec6-852971f2a6aa" />
+### diagram ERD
+<img width="1126" height="886" alt="ERD" src="https://github.com/user-attachments/assets/bcc2b043-22f4-45ee-9bfa-f4cc825c2fa6" />
 
+---
 ## Features
 
 ### Authentication & Authorization
